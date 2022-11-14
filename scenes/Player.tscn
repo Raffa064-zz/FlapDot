@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/yellowbird-midflap.png" type="Texture" id=1]
+[ext_resource path="res://assets/yellowbird-upflap.png" type="Texture" id=2]
+[ext_resource path="res://assets/yellowbird-downflap.png" type="Texture" id=3]
+[ext_resource path="res://scripts/Player.gd" type="Script" id=4]
+[ext_resource path="res://assets/jump.mp3" type="AudioStream" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 13.0
+
+[node name="Player" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 4, 2 )
+frames = SubResource( 1 )
+frame = 1
+playing = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionDetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetectionArea"]
+position = Vector2( 3, 2 )
+shape = SubResource( 2 )
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[connection signal="area_entered" from="CollisionDetectionArea" to="." method="CollisionDetectionArea_entered"]
+[connection signal="area_exited" from="CollisionDetectionArea" to="." method="CollisionDetectionArea_exited"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/FlapBirdMain.mp3-fbbbee06ff82242a07eb87ab20e84591.mp3str"
+
+[deps]
+
+source_file="res://assets/FlapBirdMain.mp3"
+dest_files=[ "res://.import/FlapBirdMain.mp3-fbbbee06ff82242a07eb87ab20e84591.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,105 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/background-day.png" type="Texture" id=1]
+[ext_resource path="res://scripts/DirectionalMove.gd" type="Script" id=2]
+[ext_resource path="res://assets/play_button.png" type="Texture" id=3]
+[ext_resource path="res://scripts/PlayButton.gd" type="Script" id=4]
+[ext_resource path="res://assets/yellowbird-downflap.png" type="Texture" id=5]
+[ext_resource path="res://assets/yellowbird-midflap.png" type="Texture" id=6]
+[ext_resource path="res://assets/yellowbird-upflap.png" type="Texture" id=7]
+[ext_resource path="res://assets/RobotoMono-VariableFont_wght.ttf" type="DynamicFontData" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFont" id=2]
+size = 120
+outline_size = 11
+outline_color = Color( 0.792157, 0.623529, 0.0392157, 1 )
+font_data = ExtResource( 8 )
+
+[node name="Main" type="Node2D"]
+__meta__ = {
+"_edit_horizontal_guides_": [ 300.0 ]
+}
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 338.112, 59.874 )
+
+[node name="bg1" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 169.056, 300.544 )
+scale = Vector2( 1.174, 1.174 )
+texture = ExtResource( 1 )
+
+[node name="bg2" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 507.15, 300.544 )
+scale = Vector2( 1.174, 1.174 )
+texture = ExtResource( 1 )
+
+[node name="bg3" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 845.25, 300.544 )
+scale = Vector2( 1.174, 1.174 )
+texture = ExtResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 507, 300 )
+current = true
+script = ExtResource( 2 )
+direction = Vector2( -1, 0 )
+speed = 0.5
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Camera2D"]
+position = Vector2( -363, 166 )
+rotation = -0.532325
+scale = Vector2( 9, 9 )
+frames = SubResource( 1 )
+frame = 2
+playing = true
+
+[node name="Label" type="Label" parent="Camera2D"]
+margin_left = -396.0
+margin_top = -260.0
+margin_right = 396.0
+margin_bottom = -101.0
+rect_pivot_offset = Vector2( 396, 79 )
+custom_colors/font_color = Color( 0.992157, 0.992157, 0.992157, 1 )
+custom_colors/font_outline_modulate = Color( 0.368627, 0.85098, 0.705882, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Flappy Bird"
+
+[node name="Control" type="Control" parent="Camera2D"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Button" type="Button" parent="Camera2D/Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -78.0
+margin_top = -48.5
+margin_right = 78.0
+margin_bottom = 48.5
+rect_pivot_offset = Vector2( 78, 48 )
+icon = ExtResource( 3 )
+flat = true
+icon_align = 1
+expand_icon = true
+script = ExtResource( 4 )
+animationSpeed = 3.0
+
+[connection signal="button_up" from="Camera2D/Control/Button" to="Camera2D/Control/Button" method="onButtonPressed"]
